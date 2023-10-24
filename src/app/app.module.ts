@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NgWhiteboardModule } from 'ng-whiteboard';
-import { NzCardModule } from 'ng-zorro-antd/card';
+import { ToolboxComponent } from '../libs/components/toolbox/toolbox.component';
+import { WhiteboardComponent } from 'src/libs/components/whiteboard/whiteboard.component';
 
 @NgModule({
   declarations: [
@@ -11,8 +11,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
   ],
   imports: [
     BrowserModule,
-    NgWhiteboardModule,
-    NzCardModule
+    WhiteboardComponent,
+    ToolboxComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

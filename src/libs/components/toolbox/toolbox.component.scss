@@ -1,0 +1,29 @@
+#toolbox {
+  position: absolute;
+  width: 400px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 10px;
+
+  &:not(:hover) {
+    box-shadow: 0 2px 8px #f0f1f2;
+  }
+  span {
+    font-size: 24px;
+  }
+}
+
+:host ::ng-deep {
+  .ant-card-body {
+    padding: 0px;
+    .toolbox--item {
+      padding: 12px;
+      display: inline-block;
+      &:hover {
+        cursor: pointer;
+        background-color: pink;
+      }
+    }
+  }
+}
