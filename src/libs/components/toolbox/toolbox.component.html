@@ -1,8 +1,10 @@
 <nz-card [nzBordered]="false" [nzHoverable]="true" id="toolbox">
-  <div class="toolbox--item" (click)="onChangeToolbox('edit')">
-    <span nz-icon nzType="edit" nzTheme="outline"></span>
-  </div>
-  <div class="toolbox--item" (click)="onChangeToolbox('close')">
-    <span nz-icon nzType="close" nzTheme="outline"></span>
+  <div
+    *ngFor="let supportTool of supportTools"
+    class="toolbox--item active"
+    [class.active]="supportTool.tool === selectedTool"
+    (click)="onChangeToolbox(supportTool.tool)"
+  >
+    <div [innerHTML]="sanitizeHtml(supportTool.icon)"></div>
   </div>
 </nz-card>
