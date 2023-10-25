@@ -1,6 +1,6 @@
 #toolbox {
   position: absolute;
-  width: 400px;
+  width: 340px;
   margin: auto;
   left: 0;
   right: 0;
@@ -20,7 +20,8 @@
     .toolbox--item {
       padding: 12px;
       display: inline-block;
-      &:hover {
+      &:hover,
+      &.active {
         cursor: pointer;
         background-color: pink;
       }
