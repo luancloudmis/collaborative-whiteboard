@@ -1,0 +1,14 @@
+<div nz-row nzJustify="space-between" class="navigation-bar">
+  <button nz-button nz-dropdown nzTrigger="click" nzType="default" [nzDropdownMenu]="menu" [nzPlacement]="'bottomLeft'"><span nz-icon nzType="menu" nzTheme="outline"></span></button>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item><span nz-icon nzType="folder" nzTheme="outline"></span><span class="menu-item-label">Open</span></li>
+      <li nz-menu-item><span nz-icon nzType="cloud-download" nzTheme="outline"></span><span class="menu-item-label">Save to...</span></li>
+      <li nz-menu-item><span nz-icon nzType="export" nzTheme="outline"></span><span class="menu-item-label">Export image...</span></li>
+      <li nz-menu-item><span nz-icon nzType="usergroup-add" nzTheme="outline"></span><span class="menu-item-label">Live collaboration</span></li>
+      <li nz-menu-item><span nz-icon nzType="reload" nzTheme="outline"></span><span class="menu-item-label">Reset canvas</span></li>
+      <li nz-menu-item><span nz-icon nzType="switcher" nzTheme="outline"></span><span class="menu-item-label">Switch to dark mode</span></li>
+    </ul>
+  </nz-dropdown-menu>
+  <button nz-button nzType="default"><span nz-icon nzType="usergroup-add" nzTheme="outline"></span></button>
+</div>

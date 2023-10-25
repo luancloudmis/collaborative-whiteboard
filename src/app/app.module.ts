@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ToolboxComponent } from '../libs/components/toolbox/toolbox.component';
 import { WhiteboardComponent } from 'src/libs/components/whiteboard/whiteboard.component';
+import {NavigationComponent} from "../libs/components/navigation/navigation.component";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { WhiteboardComponent } from 'src/libs/components/whiteboard/whiteboard.c
   imports: [
     BrowserModule,
     WhiteboardComponent,
-    ToolboxComponent
+    ToolboxComponent,
+    NavigationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
