@@ -9,4 +9,15 @@
     <li nz-menu-item><span nz-icon nzType="switcher" nzTheme="outline"></span><span class="menu-item-label">Switch to dark mode</span></li>
   </ul>
 </nz-dropdown-menu>
-<button class="invite-button" nz-button nzType="default"><span nz-icon nzType="usergroup-add" nzTheme="outline"></span></button>
+<button class="invite-button" nz-button nzType="default" (click)="openModal()"><span nz-icon nzType="usergroup-add" nzTheme="outline"></span></button>
+<nz-modal [(nzVisible)]="isVisible" [nzFooter]="null" (nzOnCancel)="handleCancel()">
+  <div *nzModalContent class="ant-modal-centered">
+    <ng-container *ngIf="!isSession">
+      <div [innerHTML]="svg | safe:'html'"></div>
+      <div class="live-collaboration">Live collaboration...</div>
+      <p nz-row style="font-weight: 600; margin-top: 10px">You can invite people to your current scene to collaborate with you.</p>
+      <p nz-row>Don't worry, the session uses end-to-end encryption, so whatever you draw will stay private. Not even our server will be able to see what you come up with.</p>
+      <button nz-button nzType="primary" style="background: #6965db; border-color: #6965db" [nzSize]="'large'" (click)="startSession()"><span nz-icon nzType="caret-right" nzTheme="outline"></span>Start session</button>
+    </ng-container>
+  </div>
+</nz-modal>
