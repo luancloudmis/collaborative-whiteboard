@@ -1,10 +1,10 @@
 <nz-card [nzBordered]="false" [nzHoverable]="true" id="toolbox">
   <div
     *ngFor="let supportTool of supportTools"
-    class="toolbox--item active"
+    class="toolbox--item"
     [class.active]="supportTool.tool === selectedTool"
     (click)="onChangeToolbox(supportTool.tool)"
   >
-    <div [innerHTML]="sanitizeHtml(supportTool.icon)"></div>
+    <div [innerHTML]="supportTool.icon | safe : 'html'"></div>
   </div>
 </nz-card>

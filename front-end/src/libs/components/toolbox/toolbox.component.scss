@@ -20,6 +20,9 @@
     .toolbox--item {
       padding: 12px;
       display: inline-block;
+      svg {
+        width: 24px;
+      }
       &:hover,
       &.active {
         cursor: pointer;

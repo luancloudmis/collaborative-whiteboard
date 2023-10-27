@@ -1,0 +1,22 @@
+<div class="tool-custom" [class.d-none]="!supportTools.includes(selectedTool)">
+  <p>Stroke:</p>
+  <div class="row">
+    <div
+      *ngFor="let i of supportStroke"
+      class="row-item"
+      [class.active]="selectedStroke === i"
+      [style.background]="i"
+      (click)="onChangeToolStroke(i)"
+    ></div>
+  </div>
+  <p>Background:</p>
+  <div class="row">
+    <div
+      *ngFor="let i of supportBackground"
+      class="row-item"
+      [class.active]="selectedBackground === i"
+      [style.background]="i"
+      (click)="onChangeToolBackground(i)"
+    ></div>
+  </div>
+</div>
