@@ -11,15 +11,52 @@ import { ToolboxService } from 'src/libs/services/toolbox.service';
   styleUrls: ['./tool-custom.component.scss'],
 })
 export class ToolCustomComponent {
-  supportTools = [ToolsEnum.BRUSH, ToolsEnum.TEXT];
-  supportStroke = ['black', 'red', 'green', 'yellow'];
-  supportBackground = [
-    'transparent',
-    '#ffc9c9',
-    '#b2f2bb',
-    '#a5d8ff',
-    '#ffec99',
+  supportTools = [
+    ToolsEnum.BRUSH,
+    ToolsEnum.TEXT,
+    ToolsEnum.LINE,
+    ToolsEnum.ELLIPSE,
+    ToolsEnum.RECT,
   ];
+  supportStroke: Record<ToolsEnum, string[]> = {
+    [ToolsEnum.BRUSH]: ['black', 'red', 'green', 'yellow'],
+    [ToolsEnum.SELECT]: [],
+    [ToolsEnum.LINE]: ['black', 'red', 'green', 'yellow'],
+    [ToolsEnum.IMAGE]: [],
+    [ToolsEnum.ELLIPSE]: ['black', 'red', 'green', 'yellow'],
+    [ToolsEnum.RECT]: ['black', 'red', 'green', 'yellow'],
+    [ToolsEnum.TEXT]: [],
+    [ToolsEnum.ERASER]: [],
+  };
+  supportBackground: Record<ToolsEnum, string[]> = {
+    [ToolsEnum.BRUSH]: [
+      'transparent',
+      '#ffc9c9',
+      '#b2f2bb',
+      '#a5d8ff',
+      '#ffec99',
+    ],
+    [ToolsEnum.SELECT]: [],
+    [ToolsEnum.LINE]: [],
+    [ToolsEnum.IMAGE]: [],
+    [ToolsEnum.ELLIPSE]: [
+      'transparent',
+      '#ffc9c9',
+      '#b2f2bb',
+      '#a5d8ff',
+      '#ffec99',
+    ],
+    [ToolsEnum.RECT]: [
+      'transparent',
+      '#ffc9c9',
+      '#b2f2bb',
+      '#a5d8ff',
+      '#ffec99',
+    ],
+    [ToolsEnum.TEXT]: [],
+    [ToolsEnum.ERASER]: [],
+  };
+
   constructor(private toolboxService: ToolboxService) {}
   get selectedTool(): ToolsEnum {
     return this.toolboxService.selectedTool;

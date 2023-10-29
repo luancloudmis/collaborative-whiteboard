@@ -17,7 +17,16 @@ export class WhiteboardComponent {
     private toolboxService: ToolboxService,
     private readonly destroy$: DestroyService
   ) {}
+  onChangeData = (...params: any[]) => {
+    window.console.log('>>>', ...params);
+  };
   get selectedTool(): ToolsEnum {
     return this.toolboxService.selectedTool;
+  }
+  get selectedStroke(): string {
+    return this.toolboxService.selectedStroke;
+  }
+  get selectedBackground(): string {
+    return this.toolboxService.selectedBackground;
   }
 }

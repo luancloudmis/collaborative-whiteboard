@@ -9,11 +9,25 @@ import { BehaviorSubject } from 'rxjs';
 export class ToolboxService {
   private dataSubject = new BehaviorSubject<any>(null);
   public data$ = this.dataSubject.asObservable();
-  private _selectedTool = ToolsEnum.SELECT;
-  get selectedTool () {
+  private _selectedTool = ToolsEnum.BRUSH;
+  private _selectedStroke: string = '';
+  private _selectedBackground: string = '';
+  get selectedTool() {
     return this._selectedTool;
   }
+  get selectedStroke() {
+    return this._selectedStroke;
+  }
+  get selectedBackground() {
+    return this._selectedBackground;
+  }
   updateTool(tool: any) {
-    this._selectedTool = tool
+    this._selectedTool = tool;
+  }
+  updateStroke(tool: any) {
+    this._selectedStroke = tool;
+  }
+  updateBackground(tool: any) {
+    this._selectedBackground = tool;
   }
 }
