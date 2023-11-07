@@ -9,7 +9,7 @@ export class WebsocketService {
   private socket$: WebSocketSubject<any>;
 
   constructor() {
-    this.socket$ = webSocket('ws://localhost:3000');
+    this.socket$ = webSocket('ws://localhost:8000');
   }
 
   public connect(): void {

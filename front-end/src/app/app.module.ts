@@ -18,18 +18,4 @@ import { WebsocketService } from 'src/libs/services/websocket.service';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule implements OnInit {
-  constructor(private websocketService: WebsocketService) {}
-  ngOnInit(): void {
-    this.websocketService.connect();
-
-    this.websocketService.sendMessage({
-      type: 'hello',
-      content: 'Hello, server!',
-    });
-
-    this.websocketService.getMessages().subscribe((message) => {
-      console.log('Received message:', message);
-    });
-  }
-}
+export class AppModule{}
