@@ -2,13 +2,19 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   WebSocketGateway,
-  WebSocketServer
+  WebSocketServer,
 } from '@nestjs/websockets';
-import {Server, Socket} from 'socket.io'
-import {v4 as uuid} from 'uuid'
+import { Server, Socket } from 'socket.io';
+import { v4 as uuid } from 'uuid';
 
-@WebSocketGateway()
-export class WebsocketGateway implements OnGatewayConnection, OnGatewayDisconnect{
+@WebSocketGateway(5000, {
+  cors: {
+    origin: '*',
+  },
+})
+export class WebsocketGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer() server: Server;
   connections: { id: string; socket: Socket }[] = [];
 
