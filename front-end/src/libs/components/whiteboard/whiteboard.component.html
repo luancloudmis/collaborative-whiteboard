@@ -1,1 +1,7 @@
-<ng-whiteboard id="whiteboard" [selectedTool]="selectedTool"></ng-whiteboard>
+<ng-whiteboard
+  id="whiteboard"
+  [selectedTool]="selectedTool"
+  [strokeColor]="selectedStroke"
+  [fill]="selectedBackground"
+  (dataChange)="onChangeData($event)"
+></ng-whiteboard>
