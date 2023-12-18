@@ -9,8 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { SafePipe } from '../../pipes/safe.pipe';
-import { WebSocketService } from 'src/libs/services/websocket.service';
 import { Subscription } from 'rxjs';
+import { WebRTCService } from 'src/libs/services/webRTC.service';
 
 @Component({
   selector: 'app-navigation',
@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent {
   isVisible = false;
   isSession = false;
   svg =
@@ -38,24 +38,21 @@ export class NavigationComponent implements OnInit {
   receivedMessages: any[] = [];
   messageSubscription!: Subscription;
 
-  constructor(private webSocketService: WebSocketService) {}
-
-  ngOnInit(): void {
-    this.messageSubscription = this.webSocketService
-      .getMessage()
-      .subscribe((message) => {
-        this.receivedMessages.push(message);
-      });
+  constructor(private webRTCService: WebRTCService) {
+    this.webRTCService.getMessage().subscribe((message) => {
+      // Handle received WebRTC messages
+      console.log('Received WebRTC message:', message);
+    });
   }
 
   sendMessage(): void {
     const message = { content: 'Hello, WebSocket!' };
-    this.webSocketService.sendMessage(message);
+    this.webRTCService.sendMessage(message);
   }
 
   ngOnDestroy(): void {
     this.messageSubscription.unsubscribe();
-    this.webSocketService.disconnect();
+    this.webRTCService.disconnect();
   }
 
   handleCancel() {
@@ -63,7 +60,7 @@ export class NavigationComponent implements OnInit {
   }
 
   startSession() {
-    this.webSocketService.connect();
+    this.webRTCService.connect();
   }
 
   openModal() {
