@@ -26,7 +26,7 @@ export class WebsocketGateway
   handleConnection(client: Socket) {
     const id = `conn-${uuid()}`;
     this.connections.push({ id, socket: client });
-
+    console.log(`${id} connected`);
     // Send the local id for the connection
     client.emit('connection', id);
 
