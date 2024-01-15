@@ -11,12 +11,12 @@ export class WebSocketService {
 
   constructor() {}
 
-  private setupSocket(): void {
-    const url = 'http://localhost:5000';
+  private setupSocket(onConnected?: () => void): void {
+    const url = 'http://localhost:6969';
     if (!this.socket) {
       this.socket = io(url);
       this.socket.on('connect', () => {
-        console.log('WebSocket connected');
+        if (onConnected) onConnected();
       });
       this.socket.on('message', (message: any) => {
         this.messageSubject.next(message);
@@ -27,9 +27,9 @@ export class WebSocketService {
     }
   }
 
-  public connect(): void {
+  public connect(onConnected?: () => void): void {
     if (!this.socket || this.socket.disconnected) {
-      this.setupSocket();
+      this.setupSocket(onConnected);
     }
   }
 
@@ -43,6 +43,30 @@ export class WebSocketService {
 
   public getMessage(): Observable<any> {
     return this.messageSubject.asObservable();
+  }
+
+  public sendICECandidate(candidate: RTCIceCandidateInit): void {
+    if (this.socket) {
+      this.socket.emit('ice-candidate', candidate);
+    } else {
+      console.error('WebSocket is not connected.');
+    }
+  }
+
+  public sendOffer(offer: RTCSessionDescriptionInit): void {
+    if (this.socket) {
+      this.socket.emit('offer', offer);
+    } else {
+      console.error('WebSocket is not connected.');
+    }
+  }
+
+  public sendAnswer(answer: RTCSessionDescriptionInit): void {
+    if (this.socket) {
+      this.socket.emit('answer', answer);
+    } else {
+      console.error('WebSocket is not connected.');
+    }
   }
 
   public disconnect(): void {
