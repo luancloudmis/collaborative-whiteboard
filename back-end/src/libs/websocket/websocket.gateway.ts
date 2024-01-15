@@ -7,7 +7,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 
-@WebSocketGateway(5000, {
+@WebSocketGateway(6969, {
   cors: {
     origin: '*',
   },

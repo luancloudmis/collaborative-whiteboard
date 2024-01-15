@@ -12,7 +12,7 @@ export class WebSocketService {
   constructor() {}
 
   private setupSocket(onConnected?: () => void): void {
-    const url = 'http://localhost:5000';
+    const url = 'http://localhost:6969';
     if (!this.socket) {
       this.socket = io(url);
       this.socket.on('connect', () => {
@@ -48,6 +48,14 @@ export class WebSocketService {
   public sendICECandidate(candidate: RTCIceCandidateInit): void {
     if (this.socket) {
       this.socket.emit('ice-candidate', candidate);
+    } else {
+      console.error('WebSocket is not connected.');
+    }
+  }
+
+  public sendOffer(offer: RTCSessionDescriptionInit): void {
+    if (this.socket) {
+      this.socket.emit('offer', offer);
     } else {
       console.error('WebSocket is not connected.');
     }

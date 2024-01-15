@@ -14,42 +14,37 @@ export class WebRTCService {
   constructor(private webSocketService: WebSocketService) {}
 
   private createPeerConnection(): void {
-    this.webSocketService.connect(() => {
+    this.webSocketService.connect(async () => {
       this.peerConnection = new RTCPeerConnection();
+      this.dataChannel =
+        this.peerConnection.createDataChannel('sendDataChannel');
       this.peerConnection.ondatachannel = (event) => {
-        // Handle data channel creation
         this.dataChannel = event.channel;
         this.setupDataChannel();
-        // ...
       };
 
       this.peerConnection.onicecandidate = (event) => {
-        // Handle ICE candidate generation
-        // ...
         if (event.candidate) {
-          // Send ICE candidate to the remote peer via WebSocket
           this.webSocketService.sendICECandidate(event.candidate);
         }
       };
+
+      const offer = await this.peerConnection.createOffer();
+      this.peerConnection.setLocalDescription(offer);
+      this.webSocketService.sendOffer(offer);
 
       this.webSocketService.getMessage().subscribe((message: any) => {
         console.log('message', message);
         this.handleSignalingMessage(message);
       });
     });
-    // Other event handlers and setup for the peer connection
   }
 
   handleSignalingMessage(message: any) {
-    // Process signaling messages received from the WebSocket
-    // Handle offer, answer, and ICE candidates
-    // ...
-
-    // For example:
     if (this.peerConnection) {
       if (message.type === 'offer') {
         this.peerConnection.setRemoteDescription(
-          new RTCSessionDescription(message)
+          new RTCSessionDescription(message.payload)
         );
         this.peerConnection
           .createAnswer()
@@ -68,11 +63,11 @@ export class WebRTCService {
           });
       } else if (message.type === 'answer') {
         this.peerConnection.setRemoteDescription(
-          new RTCSessionDescription(message)
+          new RTCSessionDescription(message.payload)
         );
       } else if (message.type === 'ice-candidate') {
         this.peerConnection.addIceCandidate(
-          new RTCIceCandidate(message.candidate)
+          new RTCIceCandidate(message.payload)
         );
       }
     }
@@ -98,10 +93,7 @@ export class WebRTCService {
     }
   }
 
-  public sendMessage(message: any): void {
-    // Check if data channel exists and send the message
-    // ...
-  }
+  public sendMessage(message: any): void {}
 
   public getMessage(): Subject<any> {
     return this.messageSubject;
@@ -109,8 +101,6 @@ export class WebRTCService {
 
   public disconnect(): void {
     if (this.peerConnection) {
-      // Disconnect the peer connection
-      // ...
       this.peerConnection = undefined;
     }
   }
